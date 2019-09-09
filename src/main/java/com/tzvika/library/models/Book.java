@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "books")
 public class Book {
+
     @Id
     public String id;
     public String title;
@@ -24,6 +25,10 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 

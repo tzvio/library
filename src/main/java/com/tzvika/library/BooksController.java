@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -23,5 +24,20 @@ public class BooksController {
     @PostMapping("/")
     public void createBook(@RequestBody Book book) {
         bookRepository.save(book);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Book> getBookById(@PathVariable("id") String id) {
+        return bookRepository.findById(id);
+    }
+    @PutMapping("/{id}")
+    public void updateBook(@PathVariable("id") String id, @RequestBody Book book) {
+        book.setId(id);
+        bookRepository.save(book);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBook(@PathVariable("id") String id) {
+        bookRepository.deleteById(id);
     }
 }
