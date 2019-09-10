@@ -7,9 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Book {
 
     @Id
-    public String id;
-    public String title;
-    public String author;
+    private String id;
+    private String title;
+    private String author;
 
     public String getTitle() {
         return title;
@@ -31,6 +31,9 @@ public class Book {
         this.id = id;
     }
 
+    public String getId() {
+        return id;
+    }
 
 
 }
