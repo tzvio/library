@@ -1,10 +1,9 @@
 package com.tzvika.library;
 
 import com.tzvika.library.models.User;
-import com.tzvika.library.repositories.UserRepository;
+import com.tzvika.library.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -13,30 +12,29 @@ import java.util.Optional;
 public class UsersController {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @GetMapping("/")
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userService.getAllUsers();
     }
 
     @PostMapping("/")
     public void createUser(@RequestBody User user) {
-        userRepository.save(user);
+        userService.addUser(user);
     }
 
     @GetMapping("/{id}")
     public Optional<User> getUserById(@PathVariable("id") String id) {
-        return userRepository.findById(id);
+        return userService.getUserById(id);
     }
     @PutMapping("/{id}")
     public void updateUser(@PathVariable("id") String id, @RequestBody User user) {
-        user.setId(id);
-        userRepository.save(user);
+        userService.updateUserById(user, id);
     }
 
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable("id") String id) {
-        userRepository.deleteById(id);
+        userService.deleteUser(id);
     }
 }
